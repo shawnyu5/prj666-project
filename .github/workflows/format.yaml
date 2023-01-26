@@ -7,7 +7,7 @@ on:
       branches: ["master"]
 
 jobs:
-  checkFormatting:
+   checkFormatting:
       runs-on: ubuntu-latest
       steps:
          - uses: actions/checkout@v3
@@ -16,11 +16,15 @@ jobs:
               python-version: "3.10"
          - name: Check java formatting
            run: |
-             # get the file that checks formatting using google-java-format
-             curl https://raw.githubusercontent.com/plume-lib/run-google-java-format/master/check-google-java-format.py -o check-google-java-format.py
-             shopt -s globstar
-             python check-google-java-format.py **/*.java
-         - name: Check Js formatting
+              # get the file that checks formatting using google-java-format
+              curl https://raw.githubusercontent.com/plume-lib/run-google-java-format/master/check-google-java-format.py -o check-google-java-format.py
+              shopt -s globstar
+              python check-google-java-format.py **/*.java
+         - name: Check vue formatting
            uses: actionsx/prettier@v2
            with:
-             args: --check exam/ # only run prettier on js files
+              args: --check exam/ # only run prettier on js files
+         - name: Check angular formatting
+           uses: actionsx/prettier@v2
+           with:
+              args: --check exam-angular/ # only run prettier on js files
