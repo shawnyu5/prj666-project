@@ -7,7 +7,7 @@ yarn-error.log*
 
 .env
 # Editor directories and files
-yarn.lock
+# yarn.lock
 .idea
 .vscode
 *.suo
