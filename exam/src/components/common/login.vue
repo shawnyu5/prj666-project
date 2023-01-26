@@ -1,4 +1,3 @@
-<!-- 用户登录界面 -->
 <template>
    <div id="login">
       <div class="bg"></div>
@@ -67,19 +66,7 @@
             </div>
          </el-col>
       </el-row>
-      <el-row class="footer">
-         <el-col>
-            <p class="msg2">
-               Some text in here<a
-                  href="http://beian.miit.gov.cn/"
-                  target="_blank"
-                  >Some text in here</a
-               >
-            </p>
-         </el-col>
-      </el-row>
       <section class="remind">
-         <span>Account number: yzhou120@gmail.com</span>
          <span>Account number: yzhou116@gmail.com</span>
          <span>All password: Sd!4888202</span>
       </section>
@@ -107,13 +94,11 @@ export default {
       };
    },
    methods: {
-      //用户登录请求后台处理
-      //Change every rul to http://localhost:8080/ without api, don't just delete it, need to deploy it after
       login() {
          console.log("Login -------");
 
          this.$axios({
-            url: "http://localhost:8080/authenticatet",
+            url: process.env.API_ENDPOINT + "authenticatet",
             method: "post",
             data: {
                ...this.formLabelAlign,
@@ -135,8 +120,6 @@ export default {
                console.log("User name" + res.data.username);
                switch (this.formLabelAlign.type) {
                   case "Subscriber":
-                     /*   this.$cookies.set("cname", resData.studentName)
-              this.$cookies.set("cid", resData.studentId) */
                      this.$cookies.set("cname", this.formLabelAlign.username);
                      this.$cookies.set("cid", this.formLabelAlign.username);
                      this.$router.push({ path: "/student" });
@@ -145,13 +128,13 @@ export default {
                      this.$cookies.set("cname", this.formLabelAlign.username);
                      this.$cookies.set("cid", this.formLabelAlign.username);
                      this.$cookies.set("role", 0);
-                     this.$router.push({ path: "/index" }); //跳转到首页
+                     this.$router.push({ path: "/index" });
                      break;
                   case "Publisher": //教师
                      this.$cookies.set("cname", this.formLabelAlign.username);
                      this.$cookies.set("cid", this.formLabelAlign.username);
                      this.$cookies.set("role", 1);
-                     this.$router.push({ path: "/index" }); //跳转到教师用户
+                     this.$router.push({ path: "/index" });
                      break;
                }
 
@@ -176,7 +159,6 @@ export default {
           } */
             }
             if (resData == null) {
-               //错误提示
                this.$message({
                   showClose: true,
                   type: "error",
